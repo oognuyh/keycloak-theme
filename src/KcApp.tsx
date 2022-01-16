@@ -1,22 +1,20 @@
 import { memo } from 'react'
-import { defaultKcProps } from 'keycloakify'
+import { defaultKcProps, KcContextBase } from 'keycloakify'
 
 import { LoginOtp } from 'keycloakify/lib/components/LoginOtp'
-import { Register } from 'keycloakify/lib/components/Register'
-import { Login } from 'keycloakify/lib/components/Login'
+import { Register } from './components/Register'
+import { Login } from './components/Login'
 import { Terms } from 'keycloakify/lib/components/Terms'
 import { Error } from 'keycloakify/lib/components/Error'
-import { LoginIdpLinkConfirm } from 'keycloakify/lib/components/LoginIdpLinkConfirm'
 import { Info } from 'keycloakify/lib/components/Info'
-import { LoginResetPassword } from 'keycloakify/lib/components/LoginResetPassword'
+import { LoginIdpLinkConfirm } from 'keycloakify/lib/components/LoginIdpLinkConfirm'
+import { LoginResetPassword } from './components/LoginResetPassword'
 import { LoginVerifyEmail } from 'keycloakify/lib/components/LoginVerifyEmail'
 import { LoginUpdatePassword } from 'keycloakify/lib/components/LoginUpdatePassword'
-import { LoginPageExpired } from 'keycloakify/lib/components/LoginPageExpired'
+import { LoginPageExpired } from './components/LoginPageExpired'
 import { LoginUpdateProfile } from 'keycloakify/lib/components/LoginUpdateProfile'
 
-import type { KcContext } from './kcContext'
-
-export const KcApp = memo(({ kcContext }: { kcContext: KcContext }) => {
+export const KcApp = memo(({ kcContext }: { kcContext: KcContextBase }) => {
   const kcProps = defaultKcProps
 
   console.debug('KcApp kcContext.pageId', kcContext.pageId)

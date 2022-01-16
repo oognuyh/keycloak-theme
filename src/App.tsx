@@ -1,21 +1,28 @@
 import React from 'react'
-import { defaultKcProps } from 'keycloakify'
-import { kcContext } from './kcContext'
+import { defaultKcProps, getKcContext } from 'keycloakify'
 import { KcApp } from './KcApp'
-import { Grommet, grommet } from 'grommet'
+import { createTheme, CssBaseline, ThemeProvider } from '@mui/material'
+
+const theme = createTheme()
+const { kcContext } = getKcContext({
+  mockPageId: 'register.ftl'
+})
 
 const App: React.FC = () => {
   if (kcContext === undefined) throw new Error('kcContext is undefined.')
 
   return (
-    <Grommet full theme={grommet}>
+    <ThemeProvider 
+      theme={theme}
+    >
+      <CssBaseline />
       <KcApp
         kcContext={kcContext}
         {...{
           ...defaultKcProps,
         }}
       />
-    </Grommet>
+    </ThemeProvider>
   )
 }
 
