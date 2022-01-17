@@ -5,7 +5,7 @@ import { createTheme, CssBaseline, ThemeProvider } from '@mui/material'
 
 const theme = createTheme()
 const { kcContext } = getKcContext({
-  mockPageId: 'register.ftl'
+  //mockPageId: 'login-page-expired.ftl'
 })
 
 const App: React.FC = () => {

@@ -15,9 +15,8 @@ import { getStatus, WARNING } from '../../utils/status'
 import Logo from '../../assets/logo-bk.png'
 import { Language } from '@mui/icons-material'
 
-import type { KcTemplateProps } from 'keycloakify'
+import type { KcTemplateProps, KcContextBase } from 'keycloakify'
 import type { ReactNode } from 'react'
-import type { KcContext } from '../../kcContext'
 import { Alert, Box, Button, IconButton, Container, Menu, MenuItem, Stack } from '@mui/material'
 
 export type TemplateProps = {
@@ -31,11 +30,9 @@ export type TemplateProps = {
   formNode: ReactNode
   infoNode?: ReactNode
   doFetchDefaultThemeResources: boolean,
-} & { kcContext: KcContext } & KcTemplateProps
+} & { kcContext: KcContextBase } & KcTemplateProps
 
 export const Template = memo((props: TemplateProps) => {
-  console.log(props)
-
   const { cx } = useCssAndCx()
   const { msg } = useKcMessage()
   const { kcLanguageTag, setKcLanguageTag } = useKcLanguageTag()
