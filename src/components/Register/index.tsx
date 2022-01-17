@@ -18,8 +18,7 @@ export const Register = memo(({ kcContext, ...props }: { kcContext: KcContextBas
 
   })
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    e.target.name = e.target.name === 'password-confirm' ? 'passwordConfirm' : e.target.name
-    setValues(prev => ({...prev, [e.target.name]: e.target.value}))
+    setValues(prev => ({...prev, [e.target.name === 'password-confirm' ? 'passwordConfirm' : e.target.name]: e.target.value}))
   }
 
   return (
@@ -27,6 +26,7 @@ export const Register = memo(({ kcContext, ...props }: { kcContext: KcContextBas
       {...{ kcContext, ...props }}
       doFetchDefaultThemeResources={false}
       displayInfo={true}
+      displayMessage={messagesPerField.exists('global')}
       headerNode={msg('registerTitle')}
       formNode={
         <Box 
@@ -107,29 +107,43 @@ export const Register = memo(({ kcContext, ...props }: { kcContext: KcContextBas
                 helperText={messagesPerField.existsError('email') && messagesPerField.get('email')}
               />
             </Grid>
+            
+            {passwordRequired && (
+              <Grid item xs={12}>
+                <PasswordTextField
+                  variant="outlined"
+                  pwd={values.password}
+                  onPasswordChange={onChange}
+                  label={msg('password')}
+                  id="password"
+                  error={messagesPerField.existsError('password')}
+                  helperText={messagesPerField.existsError('password') && messagesPerField.get('password')}
+                />
+              </Grid>)}
+
+            {passwordRequired && (  
+              <Grid item xs={12}>
+                <PasswordTextField
+                  variant="outlined"
+                  pwd={values.passwordConfirm}
+                  onPasswordChange={onChange}
+                  name="password-confirm"
+                  label={msg('passwordConfirm')}
+                  id="password-confirm"
+                  error={messagesPerField.existsError('password-confirm')}
+                  helperText={messagesPerField.existsError('password-confirm') && messagesPerField.get('password-confirm')}
+                />
+              </Grid>)}
 
             <Grid item xs={12}>
-              <PasswordTextField
+              <TextField
                 variant="outlined"
-                pwd={values.password}
-                onPasswordChange={onChange}
-                label={msg('password')}
-                id="password"
-                error={messagesPerField.existsError('password')}
-                helperText={messagesPerField.existsError('password') && messagesPerField.get('password')}
-              />
-            </Grid>
-
-            <Grid item xs={12}>
-              <PasswordTextField
-                variant="outlined"
-                pwd={values.passwordConfirm}
-                onPasswordChange={onChange}
-                name="password-confirm"
-                label={msg('passwordConfirm')}
-                id="password-confirm"
-                error={messagesPerField.existsError('password-confirm')}
-                helperText={messagesPerField.existsError('password-confirm') && messagesPerField.get('password-confirm')}
+                required
+                fullWidth
+                id="user.attributes.phoneNumber"
+                label={'Phonenumber'}
+                margin="normal"
+                name="user.attributes.phoneNumber"
               />
             </Grid>
 
